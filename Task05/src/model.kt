@@ -11,7 +11,7 @@ class Model (archiveName: String) {
         try {
             zipFile = ZipFile(archiveName)
         } catch (e: Exception) {
-            println("Caught ${e.toString().substringBefore(":")} " +
+            println("Caught ${e.toString().substringBefore(":").substringAfterLast(".")} " +
                     "while trying to open archive $archiveName")
             exitProcess(1)
         }

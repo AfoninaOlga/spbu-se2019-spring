@@ -3,7 +3,7 @@ package zipviewer
 import java.util.zip.ZipEntry
 
 fun getHelp() {
-    println("Type one of the following commands:\n" +
+    println("Wrong arguments! Type one of the following commands:\n" +
             "    %path to archive% folder_info %folder_name%\n" +
             "    %path to archive% file_info %file_n%\n" +
             "    %path to archive% print_archive")
@@ -15,14 +15,14 @@ class View(private var model: Model) {
         val folderList = model.getFolderList(folderName)
 
         if (folderList.isEmpty()) {
-            println("There is no such folder!")
+            println("There is no folder $folderName!")
             return
         }
 
         if (folderList.size == 1) {
-            print("Folder exists!")
+            print("Folder $folderName exists!")
         }  else {
-            println("There are ${folderList.size} folders with such name:")
+            println("There are ${folderList.size} folders with name $folderName:")
 
             for (folder in folderList) {
                 val path = folder.name
@@ -36,14 +36,14 @@ class View(private var model: Model) {
         val fileList = model.getFileList(fileName)
 
         if (fileList.isEmpty()) {
-            println("There is no such file!")
+            println("There is no file $fileName!")
             return
         }
 
         if (fileList.size == 1) {
-            println("File exists!")
+            println("File $fileName exists!")
         } else {
-            println("There are ${fileList.size} files with such name:")
+            println("There are ${fileList.size} files with name $fileName:")
         }
 
         for (file in fileList) {
@@ -71,7 +71,7 @@ class View(private var model: Model) {
             var cnt = name.filter {it in setOf('/')}.length
             name = name.substringAfterLast("/")
             var offset = if (cnt == 0) ""
-                            else "     " + "||   ".repeat(cnt - 1) + " ╚====="
+                            else "||   ".repeat(cnt) + " ╚====="
 
             println(offset + name)
         }
